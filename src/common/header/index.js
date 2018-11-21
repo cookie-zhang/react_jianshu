@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import '../../static/iconfont/iconfont.css';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
-import { actionCreators } from './store'
+import { actionCreators } from './store';
+import { actionCreators as loginActionCreators } from '../../pages/login/store/index'
+import { Link } from 'react-router-dom'
 import { HeaderWrapper, Logo, Nav, NavItem, SearchWrppers, NavSearch, SearchInfo,SearchInfoTitle, SearchInfoSwitch,SearchInfoItem, Addition,Button
       } from './style'
 
@@ -42,11 +44,13 @@ class Header extends Component {
   render(){
     return(
       <HeaderWrapper>
-        <Logo href='/'></Logo>
+        <Link to='/'>
+          <Logo></Logo>
+        </Link>
         <Nav>
           <NavItem className='left active'><i className='iconfont'>&#xe72f;</i>首页</NavItem>
           <NavItem className='left'>下载App</NavItem>
-          <NavItem className='right'>登录</NavItem>
+          {this.props.login ? <NavItem onClick={this.props.loginOut} className='right'>退出</NavItem> : <NavItem className='right'><Link to='/login'>登录</Link></NavItem>}
           <NavItem className='right'><i className='iconfont'>&#xe636;</i></NavItem>
             <SearchWrppers>
             <CSSTransition
@@ -67,7 +71,9 @@ class Header extends Component {
             </SearchWrppers>
         </Nav>
         <Addition>
-          <Button className='write'><i className='iconfont'>&#xe6a4;</i>写文章</Button>
+          <Link to='/write'>
+            <Button className='write'><i className='iconfont'>&#xe6a4;</i>写文章</Button>
+          </Link>
           <Button className='sigin'>注册</Button>
         </Addition>
       </HeaderWrapper>
@@ -85,7 +91,8 @@ const mapStateToProps = (state) => { // 数据映射到props里面
     list: state.getIn(['header','list']),
     totalPage: state.getIn(['header','totalPage']),
     page: state.getIn(['header','page']),
-    mouseIn: state.getIn(['header','mouseIn'])
+    mouseIn: state.getIn(['header','mouseIn']),
+    login: state.getIn(['login','login'])
   }
   
 }
@@ -114,12 +121,15 @@ const mapDispatchToProps = (dispatch)=> {  //这里面其实主要是做派发�
 				originAngle = 0;
 			}
 			spin.style.transform = 'rotate(' + (originAngle + 360) + 'deg)';
-      if(page<totalPage){
-        page = page + 1;
-      }else{
-        page = 1;
-      }
+        if(page<totalPage){
+          page = page + 1;
+        }else{
+          page = 1;
+        }
       dispatch(actionCreators.switcItem(page));
+    },
+    loginOut(){
+      dispatch(loginActionCreators.loginOut())
     }
   }
 }

@@ -1,22 +1,18 @@
-import  React, { Component } from 'react';
+import  React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { TopicWrapper,TopicItem } from '../style';
 //专题
 
-class Topic extends Component {
+class Topic extends PureComponent {
     render(){
         return(
                 <TopicWrapper>
                     {
                         this.props.topicList.map((item, index)=>{
                             return(
-                                <TopicItem key={item.id}>
-                                    <img
-                                    className='topic-pic'
-                                    alt=''
-                                    src={item.imgUrl}
-                                    ></img>
-                                    {item.title}
+                                <TopicItem key={item.get('id')}>
+                                    <img className='topic-pic' alt='' src={item.get('imgUrl')}  />
+                                    {item.get('title')}
                                 </TopicItem>
                             )
                         })
@@ -28,7 +24,6 @@ class Topic extends Component {
 }
 
 const mapStateToProps = (state)=>{
-    debugger;
     return{
         topicList: state.getIn(['home','topicList']),
     }

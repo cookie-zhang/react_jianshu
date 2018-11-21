@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { RecommendWrapper, RecommendItem } from '../style';
-class Recomme extends Component {
+class Recomme extends PureComponent {
     render(){
         return(
            <div>
@@ -9,7 +9,7 @@ class Recomme extends Component {
                    {
                         this.props.recommendList.map((item,index)=>{
                             return(
-                                <RecommendItem key={item.id} imgUrl={item.imgUrl} />
+                                <RecommendItem key={item.get('id')} imgUrl={item.get('imgUrl')} />
                             )
                         })
                    }

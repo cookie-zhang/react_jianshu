@@ -6,7 +6,7 @@ export const HeaderWrapper = styled.div`
     border-bottom: 1px solid #f0f0f0
 `
                 //styled.a.attrs({href:'/'}) 也可以这么写 
-export const Logo = styled.a` 
+export const Logo = styled.div` 
     position: absolute;
     display: block;
     top: 0;
@@ -36,6 +36,7 @@ export const NavItem  = styled.div`
   padding: 0 15px;
   font-size: 17px;
   color: #333;
+  cursor:pointer;
   .iconfont{
       height:56px;
       line-height:56px;
