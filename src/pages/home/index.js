@@ -4,35 +4,34 @@ import Topic from './commponents/Topic';
 import Write from './commponents/write';
 import Recomme from './commponents/Recomme';
 import List from './commponents/List';
-import {HomeWrapper,HomeLeft,HomeRight, BackTop, ImgWrapper} from './style';
+import {HomeWrapper,HomeLeft,HomeRight, BackTop} from './style';
 import { actionCreators } from './store';
-import Swiper from 'swiper/dist/js/swiper.js'
+import Swiper from 'swiper/dist/js/swiper.js';
 import 'swiper/dist/css/swiper.min.css';
-import { fromJS } from 'immutable'
 
 class Home extends PureComponent {
     handleScrollTop() {
 		window.scrollTo(0, 0);
 	}
     render(){
-        console.log(fromJS(this.props.bannerImg))
+        console.log(this.props.bannerImg)
         return(
             <HomeWrapper>
 				<HomeLeft>
 					
-				<div className="swiper-container">
-                <div className="swiper-wrapper">
-              {this.props.bannerImg.map((item,index)=>(
-                <ImgWrapper key={index} alt='' className="swiper-slide" src={item.get('imgUrl')}></ImgWrapper>
-
-                ))}  
+        <div className="swiper-container">
+            <div className="swiper-wrapper">
+                {this.props.bannerImg.map((item,index)=>(
+                    <img key={index} className='banner-img swiper-slide' alt='' src={item.get('imgUrl')}></img>
+                ))}
             </div>
             <div className='swiper-pagination'></div>
-                 <div className='swiper-button-warp'>    
+            <div className='swiper-button-warp'>    
                 <div className="swiper-button-next"></div>
                 <div className="swiper-button-prev"></div>
-            </div> 
+            </div>
         </div>
+
 
                     <Topic></Topic>
             <List></List>
@@ -48,8 +47,18 @@ class Home extends PureComponent {
     componentDidMount() {
 		this.props.changeHomeData();
         this.bindEvents();
-        
-        new Swiper('.swiper-container', {
+        this.swipper();
+    }
+
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this.props.changeScrollTopShow);
+	}
+	bindEvents() {
+		window.addEventListener('scroll', this.props.changeScrollTopShow);
+  }
+  swipper(){
+    new Swiper('.swiper-container', {
             loop: true,     //循环
             autoplay:{      //自动播放，注意：直接给autoplay:true的话，在点击之后不能再自动播放了
                 delay: 2500,
@@ -64,13 +73,7 @@ class Home extends PureComponent {
                 prevEl: '.swiper-button-prev',
             },
         });
-}
-	componentWillUnmount() {
-		window.removeEventListener('scroll', this.props.changeScrollTopShow);
-	}
-	bindEvents() {
-		window.addEventListener('scroll', this.props.changeScrollTopShow);
-	}
+  } 
 }
 const mapStateToProps = (state)=>{
     return{
@@ -81,8 +84,7 @@ const mapStateToProps = (state)=>{
 const mapDispatchToProps = (dispatch)=>{
   return{
        changeHomeData(){
-          const action = actionCreators.getHomeInfor();
-          dispatch(action);
+          dispatch(actionCreators.getHomeInfor());
         },
         changeScrollTopShow(){
             if (document.documentElement.scrollTop > 100) {

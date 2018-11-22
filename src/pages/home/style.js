@@ -93,12 +93,32 @@ export const RecommendItem = styled.div`
 `;
 
 export const WriterWrapper = styled.div`
+	position: relative;
 	width: 278px;
 	border: 1px solid #dcdcdc;
 	border-radius: 3px;
-	height: 300px;
-	line-height: 300px;
-	text-align: center;
+	height: 82px;
+	cursor: pointer;
+	.CodeImg{
+		float: left;
+		width:60px;
+		height:60px;
+		margin: 10px 0 10px 10px;
+		display:inline-block;
+	}
+	.writeSpan{
+		float: right;
+		width: 200px;
+		display:inline-block;
+		height:20px;
+		margin-top: 30px;
+		color:#333;
+	}
+	.writeSpanWords{
+		margin-left: 10px;
+		font-size: 13px;
+		color: #999;
+	}
 `;
 
 export const LoadMore = styled.div`
@@ -128,4 +148,23 @@ export const ImgWrapper = styled.img`
 		width: 630px!important;
 		height: 270px;
 		margin-left:-6px;
+`
+export const QuickCodeImg = styled.div`
+	position: absolute;
+	left: 60px;
+	top: -190px;
+	width: 150px;
+	height: 150px;
+	border-radius: 10px;
+	text-align: center;
+	line-height: 150px;
+	background: #fff;
+	.inimge{
+		width: 130px;
+		height: 130px;
+		margin: 0 auto;
+		margin-top: 10px;
+	}
+
+
 `

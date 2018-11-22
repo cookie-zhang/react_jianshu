@@ -6,7 +6,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './pages/home';
 import Detail from './pages/detail/loadable.js';
 import Login from './pages/login';
-import write from './pages/write/write'
+import write from './pages/write/write';
 class App extends Component {
   render() {
     return (

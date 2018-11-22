@@ -5,7 +5,8 @@ const changHomeData = (result)=> ({
     type: actionTypes.CHENGE_HOME_DATA,
     topicList: result.topicList,
     articleList: result.articleList,
-    recommendList: result.recommendList
+    recommendList: result.recommendList,
+    bannerImg: result.bannerImg
 })
 export const getHomeInfor = ()=>{
     return (dispatch)=>{
@@ -35,4 +36,13 @@ export const getMoreList = (page)=>{
 export const toggleTopShow = (show)=>({
     type: actionTypes.TOGGLE_SCROLL_TOP,
     show
+})
+
+export const mouserIn = () =>({
+    type: actionTypes.CODE_MOUSERIN,
+    show: true
+})
+export const mouserLeave = () =>({
+    type: actionTypes.CODE_MOUSERLEAVE,
+    show: false
 })
