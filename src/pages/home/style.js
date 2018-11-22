@@ -12,8 +12,9 @@ export const HomeLeft = styled.div`
 	padding-top: 30px;
 	width: 625px;
 	.banner-img {
-		width: 625px;
+		width: 630px!important;
 		height: 270px;
+		margin-left:-6px;
 	}
 `;
 
@@ -122,4 +123,9 @@ export const BackTop = styled.div`
 	text-align: center;
 	border: 1px solid #ccc;
 	font-size: 14px;
+`
+export const ImgWrapper = styled.img`
+		width: 630px!important;
+		height: 270px;
+		margin-left:-6px;
 `
